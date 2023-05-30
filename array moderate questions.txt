@@ -1,0 +1,464 @@
+// first and last occurance of an element in a array
+#include <iostream>
+using namespace std;
+
+int firstocc(int arr[],int n,int key){
+    int s=0,e=n-1;
+    int mid=s+(e-s)/2;
+    int ans=-1; // initialised ans to -1 at starting
+
+    while(s<=e){// is condition tak while loop chalega
+        if(arr[mid]==key){
+            ans==mid;//ans store karaya 
+            e=mid-1;//then end ko left legaye for leftmost occ.
+        }
+        else if(key>arr[mid]){//rigt me jao
+        s=mid+1;
+        }
+        else if(key<arr[mid]){//left me jao
+        e=mid-1;
+        }
+        mid=s+(e-s)/2;
+    }
+    return ans;
+} //first occ. ka function khatam
+
+int lastocc(int arr[],int n,int key){
+    int s=0,e=n-1;
+    int mid=s+(e-s)/2;
+    int ans=-1; // initialised ans to -1 at starting
+
+    while(s<=e){// is condition tak while loop chalega
+        if(arr[mid]==key){
+            ans==mid;//ans store karaya 
+            s=mid-1;//then start ko left legaye for leftmost occ.
+        }
+        else if(key>arr[mid]){//rigt me jao
+        s=mid+1;
+        }
+        else if(key<arr[mid]){//left me jao
+        e=mid-1;
+        }
+        mid=s+(e-s)/2;
+    }
+    return ans;
+} //last occurance ka function khatam
+
+
+int main(){
+
+    int even[5]={1,2,3,4,5};
+
+    cout<<"first occurance of 3 is at index "<<firstocc(even, 5, 3)<<endl;
+    cout<<"last occurance of 3 is at index "<<lastocc(even, 5, 3)<<endl;
+
+
+    return 0;
+}
+
+
+//pivot element in a array
+#include <iostream>
+using namespace std;
+
+int getpivot(int arr[],int n){
+    int s=0;
+    int e=n-1;
+    int mid=s+(e-s)/2;
+
+//while after pivot func.
+while(s<e){
+    if(arr[mid]>=arr[0])
+    {
+        s=mid+1; // start ko mid+1 kr dena
+    }
+    else{
+        e=mid;
+    }
+    mid=s+(e-s)/2;
+    }
+    return s;// or return e;
+}
+// main after while loop
+
+int main(){
+    
+    int arr[5]={3,8,10,17,1};// ko run kiya toh pivot is 4 coz, min. element 1 ka idx 4
+    
+    cout<<"pivot is "<<getpivot(arr, 5)<<endl;
+
+    return 0;
+}
+
+
+//square root of a no. using binary search
+#include <iostream>
+using namespace std;
+
+long long int sqrtinteger(int n){
+
+    int s=0;
+    int e=n;
+    long long int mid =s+(e-s)/2;
+
+    long long int ans=-1;
+    while(s<=e){
+        long long int square=mid+mid;
+
+    if(square==n)
+    return mid;
+    if(square<n){
+        ans=mid;
+        s=mid+1;
+    }
+    else{
+        e=mid-1;
+}
+mid=s+(e-s)/2;
+    }
+    return ans;
+}
+
+//function for decimal part of square root value
+double moreprecision(int n,int precision,int tempsol){
+
+double factor=1;//initialize kiya kuki usko 10 se divide kRTE jana consequently
+double ans=tempsol;
+for(int i=0;i<precision;i++){
+factor=factor/10;//to give value after decimal
+//0.1
+//0.01
+//0.001
+
+for(double j=ans; j*j<n;j=j+factor){ //j ko ans i.e, integer part se initialize kiya then mid*mid<n tak chalaya
+                                     //j is temporary solution i.e,integer part added to factor
+ans=j;// agar j*j<n h toh ans ko update kardo
+}
+}
+return ans;
+}
+int main(){
+    int n;
+    cout<<"enter the number "<<endl;
+    cin>>n;
+
+    int tempsol=sqrtinteger(n);
+    cout<<"answer is "<<moreprecision(n, 3,tempsol);// 3 is precision of 3 dig. after decimal
+
+    return 0;
+}
+
+
+//get sum of element in a array
+
+#include <iostream>
+using namespace std;
+
+getsum(int arr[],int n){
+
+    
+    //ini sum to 0 and run forloop to print sum
+    int sum=0;
+    for(int i=0;i<n;i++){
+        sum=sum+i[arr];//se updating sum
+        
+    }
+    return sum;
+}
+int main(){
+
+int arr[]={1,2,3,4,5,8};
+
+// after passing array as a poinetr we can pass a part of array
+
+cout<<"sum is "<<getsum(arr+2,1);
+
+    return 0;
+}
+
+
+//differences of cout in pointers and arrays
+#include <iostream>
+using namespace std;
+
+int main() {
+  
+  
+   int temp[10]={1,2};//temp arr banaya
+   
+   cout<<sizeof(temp)<<endl;//size of entire temp array
+   cout<<sizeof(*temp)<<endl;// size of value int in temp array
+   cout<<sizeof(&temp)<<endl;
+   
+   int *ptr=&temp[0];
+   
+   cout<<sizeof(ptr)<<endl;// size of 1 pointer block
+   cout<<sizeof(*ptr)<<endl;// value 
+  
+   
+   
+//   int arr[10]={23,122,41,67};//ye phle 4 elements baki 6 0's size.arr=40 
+  
+//   cout<<"value at 4th index "<<arr[4]<<endl;//value 0 at idx 4
+//   cout<<sizeof(arr)<<endl;
+ 
+   
+//   cout<<"first memery block address "<<arr<<endl;
+//   cout<<"other way of address of first loc. "<<endl;
+//   cout<<"first memery block address "<<&arr[0]<<endl;
+//   cout<<"value at memeoy 1st location  "<<*arr<<endl;//1st value in arr
+// cout<<"value at memeoy 1st location  "<<*arr<<endl;
+//   cout<<"adding 1 to mem 1st location "<<*arr+1<<endl;
+//   cout<<"value at memeoy 2nd location  "<<*(arr+1)<<endl;
+//   cout<<"value at memeoy 1st location  "<<(*arr)+1<<endl;//sllr to *arr+1
+  
+//   cout<<"value at memeoy 1st location  "<<arr[1]<<endl;
+// cout<<"other way of 1st loc "<<endl;//general arr[i]=*(arr+i)
+// cout<<"value at memeoy 1st location  "<<*(arr+1)<<endl;
+
+// int i=3;
+// cout<<i[arr]<<endl;//putting i ko 3 value at 3 idx of array
+
+   
+   
+    return 0;
+}
+
+
+//char arrays vs int array cout differences
+
+#include <iostream>
+using namespace std;
+
+int main(){
+ 
+ int arr[5]={1,2,3,4,5};
+  char ch[6]="abcde";//5 letters and 1 null character
+  
+  cout<<arr<<endl;//address bta rha h 1st loc. ka
+  cout<<ch<<endl;// pura char array ka content printed
+  
+  char *c=&ch[0];
+  //printing entire string
+  cout<<c<<endl;
+   
+   
+    return 0;
+}
+
+
+#include<iostream>
+using namespace std;
+
+// void update(int n){
+//  n++;
+// }
+
+//before update wala n isme as a cpy pass hua toh n is inc. after updated pass &n in update func
+
+void update(int &n){
+    n++;
+}
+
+// //return by refernce int& used before func
+// int& func(int a){
+//     int num=a;
+//     int& ans= num;
+//     return ans;
+// }
+
+
+int main()
+{
+//     int i=5;
+
+//     //create a ref. variable 
+
+//     int &j=i; // i ka refernce variable
+
+// cout<<i<<endl;
+// i++;
+// cout<<i<<endl;
+// j++;
+// cout<<i<<endl; // i and j have same val. i.e, memory block either increase i or j value increase
+// // i++;       without inrement same value will be printed
+// cout<<j<<endl;
+
+int n=5;
+
+cout<<"before update "<<n<<endl;
+update(n);
+cout<<"aftere update "<<n<<endl;
+
+// func(n);//run it is for int& func
+
+
+   return 0;
+
+}
+
+
+
+
+// creating variable size n array using heap
+#include <iostream>
+using namespace std;
+
+int getsum(int *arr, int n)
+{ // we can also passing arr in pointer form in place of arr[]
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+
+int main()
+{
+
+    int n;
+    cin >> n;
+
+    // create variable size array
+    int *arr = new int[n];
+    
+    // taking input in array
+    for (int i = 0; i < n; i++)
+    {
+
+        cin >> arr[i];
+    }
+    int ans = getsum(arr, n);
+    cout << "answer is " << ans << endl;
+    return 0;
+}
+
+
+
+// 2D array using DMA
+#include<iostream>
+using namespace std;
+
+int main(){
+
+int n;
+cin>>n;
+
+//creating 2D array
+int** arr=new int*[n];//creating int* array
+for(int i=0;i<n;i++){
+arr[i]=new int[n];//arr[i me array dal diya]
+}
+
+//taking input for 2D array
+for(int i=0; i<n;i++){// i-->row
+for(int j=0;j<n;j++){//  j-->col.
+cin>>arr[i][j];
+}
+}
+
+//printing 2D array
+cout<<endl;
+for(int i=0; i<n;i++){
+for(int j=0;j<n;j++){
+
+    cout<<arr[i][j];
+
+}cout<<endl;
+}
+   return 0;
+}
+
+
+
+
+//2d array when rows and columns are different
+#include<iostream>
+using namespace std;
+
+int main(){
+
+int row;
+cin>>row;
+
+int col;
+cin>>col;
+
+//creating 2D array
+int** arr=new int*[row];//creating int* array
+for(int i=0;i<row;i++){
+arr[i]=new int[col];//arr[i me array dal diya]
+}
+
+//taking input for 2D array
+for(int i=0; i<row;i++){// i-->row
+for(int j=0;j<row;j++){//  j-->col.
+cin>>arr[i][j];
+}
+}
+
+//printing 2D array
+cout<<endl;
+for(int i=0; i<row;i++){
+for(int j=0;j<col;j++){
+
+    cout<<arr[i][j]<<" ";
+
+}cout<<endl;
+}
+
+//releasing memory 1st har pointers ke array the uski memory release
+//by for loops
+for(int i=0;i<row;i++){
+    delete[] arr[i];
+}
+
+//phir releasing memory of int* pointers 
+delete []arr;
+
+
+
+
+   return 0;
+}
+
+
+////inversion count 
+
+#include <iostream>
+using namespace std;
+ 
+ //func getinversioncount
+int getInvCount(int arr[], int n){  
+    //firstly int cnt was 0
+    int inv_count = 0;
+    //then we run loop 0 to n-1 where n is no. of elements 
+    //here i and j are elements to be compared for counting inversions
+    for (int i = 0; i < n - 1; i++){
+        //then for each element we run loop from element to its right to//element at index n-1
+        for (int j = i + 1; j < n; j++){
+            //elememt which is smaller than given element then
+            //increment inv cnt
+            if (arr[i] > arr[j])
+                inv_count++;
+        }
+        
+        //after increment we return 
+    return inv_count;
+}
+
+
+int main()
+{
+    int arr[] = { 1, 20, 6, 4, 5 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << " Number of inversions are "
+         << getInvCount(arr, n);
+    return 0;
+}
+
+
+
+
+
